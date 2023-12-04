@@ -66,7 +66,6 @@ public class PlayerController : MonoBehaviour
         // Check if the colliding object has a specific tag
         if (collision.gameObject.CompareTag("Brig"))
         {
-            Debug.Log("BRig");
             puzzleCode=1;
         }
     }
