@@ -11,7 +11,12 @@ public class climb : MonoBehaviour
     public GameObject playerObject;
 
     private bool collide=false;
-    private bool move= false;
+    private bool moveUpBool= false;
+    private bool madeItToTop=false;
+    private bool backDown=false,goDown=false;
+    public GameObject blackPowder;
+    private bool done=false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,15 +26,28 @@ public class climb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(collide&&Input.GetKeyDown(KeyCode.E))
-        {
-            
-            move=true;
-            playerObject.GetComponent<Rigidbody>().useGravity = false;
+        if(!done){
+            if(collide&&Input.GetKeyDown(KeyCode.E))
+            {
+                
+                moveUpBool=true;
+                playerObject.GetComponent<Rigidbody>().useGravity = false;
+            }
+            if(moveUpBool){
+                moveUp();
+            }
+            if(madeItToTop&&Input.GetKeyDown(KeyCode.E)){
+        
+                grabBlackPowder();
+            }
+            if(backDown&&Input.GetKeyDown(KeyCode.E)){
+                moveDown();
+            }
+            if(goDown){
+                moveDown();
+            }
         }
-        if(move){
-            moveUp();
-        }
+        
     }
 
      void OnCollisionEnter(Collision collision){
@@ -39,15 +57,35 @@ public class climb : MonoBehaviour
             interactionText.SetActive(true);
         }
      }
-     void moveUp(){
-            if(playerObject.transform.position.y<28.0f){
+    private void moveUp(){
+            
+            interactionText.SetActive(false);
+            messageText.text="Press E to pick up black powder, and go back down";
+            if(playerObject.transform.position.y<27.0f){
                 playerObject.transform.Translate(Vector3.up * 2.0f * Time.deltaTime);
             }
-            else if(playerObject.transform.position.z<2.35f){
-                playerObject.transform.Translate(Vector3.forward * 2.0f * Time.deltaTime);
-            }
             else{
-                playerObject.GetComponent<Rigidbody>().useGravity = true;
-            }
+                //playerObject.transform= new Vector3(3.8f, 2.14f, -13.76f);
+                interactionText.SetActive(true);
+                moveUpBool=false;
+                madeItToTop=true;
+           }
+     }
+     private void moveDown(){
+        goDown=true;
+        interactionText.SetActive(false);
+        if(playerObject.transform.position.y>6.75f){
+                playerObject.transform.Translate(Vector3.down * 2.0f * Time.deltaTime);
+        }
+        else{
+            playerObject.GetComponent<Rigidbody>().useGravity = true;
+            done=true;
+        }
+     }
+     private void grabBlackPowder(){
+        blackPowder.SetActive(false);
+        messageText.text="Press E to go back down";
+        backDown=true;
+
      }
 }
