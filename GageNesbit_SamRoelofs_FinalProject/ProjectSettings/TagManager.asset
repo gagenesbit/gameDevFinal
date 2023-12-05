@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Brig
+  - greenBarrel
+  - whiteBarrel
+  - redBarrel
   layers:
   - Default
   - TransparentFX

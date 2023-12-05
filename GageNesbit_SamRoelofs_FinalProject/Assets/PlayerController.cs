@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //Movement
     public float moveSpeed = 5f;
     public float sensitivity = 2f; 
     public float jumpForce = 5f;
@@ -9,8 +10,14 @@ public class PlayerController : MonoBehaviour
     int jumpFrames=0;
     private Rigidbody rb;
     public bool puzzleActive;
+
+    //Main Message text
     public GameObject interactionText;
     public int puzzleCode=0;
+
+    //color puzzle fields
+    public string barrel;
+
     void Start(){
         rb = GetComponent<Rigidbody>();
         puzzleActive=false;
@@ -67,6 +74,15 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Brig"))
         {
             puzzleCode=1;
+        }
+        else if(collision.gameObject.CompareTag("redBarrel")){
+            barrel="red";
+        }
+        else if(collision.gameObject.CompareTag("whiteBarrel")){
+            barrel="white";
+        }
+        else if(collision.gameObject.CompareTag("greenBarrel")){
+            barrel="green";
         }
     }
 }
