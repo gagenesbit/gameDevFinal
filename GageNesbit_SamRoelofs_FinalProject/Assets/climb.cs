@@ -84,6 +84,7 @@ public class climb : MonoBehaviour
      }
      private void grabBlackPowder(){
         blackPowder.SetActive(false);
+        player.hasBlackPowder=true;
         messageText.text="Press E to go back down";
         backDown=true;
 

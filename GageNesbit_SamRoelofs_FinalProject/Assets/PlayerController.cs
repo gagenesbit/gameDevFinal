@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
 
     //color puzzle fields
     public string barrel;
+    //Deck puzzle fields;
+    public bool hasBlackPowder=false;
+    public bool hasfuse=false;
 
     void Start(){
         rb = GetComponent<Rigidbody>();
