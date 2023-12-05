@@ -17,6 +17,8 @@ public class cannon : MonoBehaviour
 
     
     public TextMeshProUGUI messageText;
+    private bool FIRED;
+    private bool done;
 
 
     // Start is called before the first frame update
@@ -33,12 +35,15 @@ public class cannon : MonoBehaviour
                 if(blackPowderMessage){
                     player.hasBlackPowder=false;
                     blackPowderPlaced=true;
+                    blackPowderMessage=false;
                 }
                 else if(fuseMessage){
                     player.hasfuse=false;
                     fusePlaced=true;
+                    fuseMessage=false;
                 }
                 else if(enterMessage){
+                    Debug.Log("Cannon Ready");
                     enterMessage=false;
                     launchTime=true;
                 }
@@ -56,42 +61,52 @@ public class cannon : MonoBehaviour
                 blackPowderPlaced=true;*/
     }
     void OnCollisionEnter(Collision collision){
-        if (collision.gameObject.CompareTag("Player")){
-            if(player.hasBlackPowder){
-                messageText.text="Press E to place black powder in the cannon";
-                blackPowderMessage=true;
-                interactionText.SetActive(true);
-
-            }
-            else if(player.hasfuse){
-                messageText.text="Press E to place the fuse in the cannon";
-                fuseMessage=true;
-                interactionText.SetActive(true);
-            }
-            else if(fusePlaced&&blackPowderPlaced){
-                messageText.text="Press E to get in the cannon";
-                enterMessage=true;
-                interactionText.SetActive(true);
-            }
-            else{
-                messageText.text="NOTHING";
-    
-                interactionText.SetActive(true);
-            }
-            
-            
-        
+    if (collision.gameObject.CompareTag("Player")){
+        if(player.hasBlackPowder){
+            messageText.text="Press E to place black powder in the cannon";
+            blackPowderMessage=true;
+            interactionText.SetActive(true);
+        }
+        else if(player.hasfuse){
+            messageText.text="Press E to place the fuse in the cannon";
+            fuseMessage=true;
+            interactionText.SetActive(true);
+        }
+        else if(fusePlaced&&blackPowderPlaced){
+            messageText.text="Press E to get in the cannon";
+            enterMessage=true;
+            interactionText.SetActive(true);
+        }
+        else{
+            messageText.text="NOTHING";
+            interactionText.SetActive(true);
         }
     }
+}
+
     private void launch(){
-        playerRB.useGravity = false;
-        playerObject.transform.position=new Vector3(8.28f, 12.83f, -13.41f);
-        messageText.text="Press E to fire";
-        interactionText.SetActive(true);
-        if(Input.GetKeyDown(KeyCode.E)){
-            playerRB.useGravity = true;
+        if(FIRED){
+            //playerObject.transform.Translate(Vector3.forward * 5.0f * Time.deltaTime);
             playerRB.AddForce(player.transform.forward * 10f, ForceMode.Impulse);
             playerRB.AddForce(player.transform.up * 10f, ForceMode.Impulse);
+            FIRED=!FIRED;
+            done=true;
         }
+        else if(done){
+
+        }
+        else{
+            playerRB.useGravity = false;
+            playerObject.transform.position=new Vector3(9.2f, 12.99f, -13.41f);
+            messageText.text="Press E to fire";
+            interactionText.SetActive(true);
+            if(Input.GetKeyDown(KeyCode.E)){
+                playerRB.useGravity=true;
+                FIRED=true;
+                interactionText.SetActive(false);
+            }
+        }
+        
+
     }
 }
