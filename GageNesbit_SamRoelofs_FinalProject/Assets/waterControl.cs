@@ -7,7 +7,9 @@ public class waterControl : MonoBehaviour
     public GameObject interactionText;
     public TextMeshProUGUI messageText;
     public GameObject waterParticles;
-    private bool hit;
+    public GameObject orangeKey;
+    private bool hit,flag;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,8 +19,11 @@ public class waterControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(hit&&Input.GetKeyDown(KeyCode.E)){
+        if(hit&&Input.GetKeyDown(KeyCode.E)&&!flag){
             waterParticles.SetActive(true);
+            orangeKey.SetActive(true);
+            flag=true;
+            messageText.text="Press e to interact with";
         }
     }
     void OnCollisionEnter(Collision collision)

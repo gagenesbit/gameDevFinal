@@ -52,6 +52,8 @@ public class climb : MonoBehaviour
 
      void OnCollisionEnter(Collision collision){
         if (collision.gameObject.CompareTag("Player")){
+            player.puzzleActive=true;
+            Debug.Log("ladder");
             collide=true;
             messageText.text="Press E to climb ladder";
             interactionText.SetActive(true);
@@ -80,6 +82,7 @@ public class climb : MonoBehaviour
         else{
             playerObject.GetComponent<Rigidbody>().useGravity = true;
             done=true;
+            player.puzzleActive=false;
         }
      }
      private void grabBlackPowder(){

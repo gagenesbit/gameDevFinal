@@ -87,7 +87,7 @@ public class cannon : MonoBehaviour
     private void launch(){
         if(FIRED){
             //playerObject.transform.Translate(Vector3.forward * 5.0f * Time.deltaTime);
-            playerRB.AddForce(player.transform.forward * 10f, ForceMode.Impulse);
+            playerRB.AddForce(player.transform.forward * 50f, ForceMode.Impulse);
             playerRB.AddForce(player.transform.up * 10f, ForceMode.Impulse);
             FIRED=!FIRED;
             done=true;

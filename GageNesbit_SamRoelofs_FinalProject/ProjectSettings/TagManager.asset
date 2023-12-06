@@ -8,6 +8,9 @@ TagManager:
   - greenBarrel
   - whiteBarrel
   - redBarrel
+  - orangeKey
+  - purpleKey
+  - yellowKey
   layers:
   - Default
   - TransparentFX

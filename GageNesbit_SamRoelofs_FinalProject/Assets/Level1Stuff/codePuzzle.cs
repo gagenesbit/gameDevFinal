@@ -5,17 +5,17 @@ using TMPro;
 
 public class codePuzzle : MonoBehaviour
 {
+    public GameObject yellowKey;
     public GameObject interactionText;
-    public TMP_Text codeText;
     public GameObject keypad;
     private PlayerController player;
     public GameObject playerObject;
-    private Canvas canvas;
     private string CODE="1234";
     private int completed=0;
     private int redo=0;
     private int rotation=0;
     private bool disabled=false;
+    private bool codeTime;
 
     public TextMeshProUGUI buttonText;
    
@@ -24,8 +24,6 @@ public class codePuzzle : MonoBehaviour
     {
         // Make sure to use playerObject, not player
         player = playerObject.GetComponent<PlayerController>();
-        canvas = keypad.GetComponent<Canvas>();
-        //canvas.enabled=false;
         
     }
 
@@ -34,7 +32,7 @@ public class codePuzzle : MonoBehaviour
     {
         if(!disabled){
 
-            if (interactionText == true && Input.GetKeyDown(KeyCode.E) && player != null && player.puzzleCode == 1){
+            if (interactionText == true && Input.GetKeyDown(KeyCode.E)&&codeTime){
                 puzzle();
             }
 
@@ -51,6 +49,10 @@ public class codePuzzle : MonoBehaviour
             else if(completed==96){
                 complete();
                 if (rotation<2400){
+                    if(!player.yellowKey&&!yellowKey.activeSelf){
+                        yellowKey.SetActive(true);
+                        codeTime=false;
+                    }
                     transform.Rotate (new Vector3 (0, 20, 0) * Time.deltaTime);
                     rotation++;
                 }
@@ -66,7 +68,9 @@ public class codePuzzle : MonoBehaviour
         // Check if the colliding object has a specific tag
         if (collision.gameObject.CompareTag("Player")&&completed==0)
         {
+            //keypad.SetActive(true);
             interactionText.SetActive(true);
+            codeTime=true;
         }
     }
 
@@ -76,7 +80,6 @@ public class codePuzzle : MonoBehaviour
         Debug.Log("Trigger hit");
         interactionText.SetActive(false);
         keypad.SetActive(true);
-        //canvas.enabled=false;
     }
 
     public void enterCode(){
@@ -97,7 +100,6 @@ public class codePuzzle : MonoBehaviour
     }
 
     private void complete(){
-        Debug.Log("Done");
         keypad.SetActive(false);
         player.puzzleActive=false;
         buttonText.text="Done";

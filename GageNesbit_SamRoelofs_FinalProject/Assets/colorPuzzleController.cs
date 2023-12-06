@@ -19,20 +19,24 @@ public class colorPuzzleController : MonoBehaviour
     private bool redPlaced;
     private bool done=false;
     private int wrong=0, move=0;
+    private colorPuzzleController scriptComponent;
 
 
     // Start is called before the first frame update
     void Start()
     {
         player = playerObject.GetComponent<PlayerController>();
+        scriptComponent = GetComponent<colorPuzzleController>();
     }
 
     // Update is called once per frame
     void Update()
     {   if(!done &&redPlaced){
+            
             wrong++;
             if(wrong>100){
                 reset();
+                Debug.Log("Block Reset");
             }
         }
         else if(!done){
@@ -41,11 +45,13 @@ public class colorPuzzleController : MonoBehaviour
                 interactionText.SetActive(true);
             }
             if(Input.GetKeyDown(KeyCode.E)&&!holdingCube&&messageText.text=="Press E to pick up a cube"){
+                Debug.Log("Picking UP");
                 pickUpCube();
                 
 
             }
             else if(Input.GetKeyDown(KeyCode.E)&&holdingCube&&!player.barrel.Equals("")){
+                Debug.Log("ready to place");
                 placeCube();
             }
         }
@@ -55,6 +61,10 @@ public class colorPuzzleController : MonoBehaviour
                 falseWall.transform.Translate(Vector3.forward * -1f * Time.deltaTime);
                 move++;
             }
+            else if(move==1000){
+                messageText.text="Press E to interact";
+                scriptComponent.enabled=false;
+            }
         }
 
         
@@ -62,9 +72,11 @@ public class colorPuzzleController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Collision");
         // Check if the colliding object has a specific tag
         if (collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log(messageText.text);
             messageText.text="Press E to pick up a cube";
             interactionText.SetActive(true);
         }
@@ -103,7 +115,7 @@ public class colorPuzzleController : MonoBehaviour
         
     }
     
-    private void reset(){
+    public void reset(){
         wrong=0;
         currentCube.transform.position = new Vector3(-1.658f, 2.417f, -15.381f);
         messageText.text="";

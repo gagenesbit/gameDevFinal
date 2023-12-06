@@ -9,6 +9,7 @@ public class giveKey : MonoBehaviour
     public GameObject interactionCanvas;
     public bool messageActive=false;
     public bool done=false;
+    public GameObject yellowKey;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,10 +35,10 @@ public class giveKey : MonoBehaviour
             interactionText.text="'Thank you for freeing me! Here's a key I swiped off a guard'";
             interactionCanvas.SetActive(true);
             messageActive=true;
+            yellowKey.SetActive(true);
         }
     }
     private void give(){
-        Debug.Log("KEy");
         interactionText.text="Press e to interact";
     }
 }

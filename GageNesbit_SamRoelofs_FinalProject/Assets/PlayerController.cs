@@ -13,13 +13,20 @@ public class PlayerController : MonoBehaviour
 
     //Main Message text
     public GameObject interactionText;
-    public int puzzleCode=0;
 
     //color puzzle fields
     public string barrel;
     //Deck puzzle fields;
     public bool hasBlackPowder=false;
     public bool hasfuse=false;
+
+    //Opening the door
+    public bool purpleKey,orangeKey, yellowKey;
+    //Inventory
+    public GameObject purplePic,orangePic,yellowPic;
+
+    public int codeReset=0;
+
 
     void Start(){
         rb = GetComponent<Rigidbody>();
@@ -32,6 +39,8 @@ public class PlayerController : MonoBehaviour
         if (!puzzleActive){
             move();
         }
+        inventory();
+
         
         
     }
@@ -73,12 +82,7 @@ public class PlayerController : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        // Check if the colliding object has a specific tag
-        if (collision.gameObject.CompareTag("Brig"))
-        {
-            puzzleCode=1;
-        }
-        else if(collision.gameObject.CompareTag("redBarrel")){
+         if(collision.gameObject.CompareTag("redBarrel")){
             barrel="red";
         }
         else if(collision.gameObject.CompareTag("whiteBarrel")){
@@ -86,6 +90,47 @@ public class PlayerController : MonoBehaviour
         }
         else if(collision.gameObject.CompareTag("greenBarrel")){
             barrel="green";
+        }
+        else if(collision.gameObject.CompareTag("purpleKey")){
+            purpleKey=true;
+        }
+        else if(collision.gameObject.CompareTag("orangeKey")){
+            orangeKey=true;
+        }
+        else if(collision.gameObject.CompareTag("yellowKey")){
+            yellowKey=true;
+        }
+    }
+
+    private void inventory(){
+        if(purpleKey){
+            purplePic.SetActive(true);
+        }
+        else{
+            purplePic.SetActive(false);
+        }
+
+        if(orangeKey){
+            orangePic.SetActive(true);
+        }
+        else{
+            orangePic.SetActive(false);
+        }
+        
+
+        if(purpleKey){
+            purplePic.SetActive(true);
+        }
+        else{
+            purplePic.SetActive(false);
+        }
+
+
+        if(yellowKey){
+            yellowPic.SetActive(true);
+        }
+        else{
+            yellowPic.SetActive(false);
         }
     }
 }
