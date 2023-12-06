@@ -19,6 +19,8 @@ public class backToMenu : MonoBehaviour
     void OnCollisionEnter(Collision collision){
         if (collision.gameObject.CompareTag("Player")){
             SceneManager.LoadScene("Menu");
+            PlayerPrefs.SetInt("twoButtonOn", true ? 1 : 0);
+        PlayerPrefs.Save();
 
         }
     }
