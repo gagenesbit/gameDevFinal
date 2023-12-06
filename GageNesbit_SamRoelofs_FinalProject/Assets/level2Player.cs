@@ -11,7 +11,19 @@ public class level2Player : MonoBehaviour
     private Rigidbody rb;
     public bool puzzleActive;
 
-    
+    //puzzle objects
+    public bool hasAxe=false;
+    public bool axe;
+    public GameObject axePic;
+
+    //raft part objects
+    public bool hasWood=false;
+    public bool hasSail=false;
+    public bool hasOar=false;
+
+    //character quests
+    public bool coconutPuzzle=false;
+    public bool raftComplete=false;
 
 
     void Start(){
@@ -25,7 +37,9 @@ public class level2Player : MonoBehaviour
             move();
         }
 
-        
+        if(raftComplete){
+            
+        }
         
     }
 
@@ -64,5 +78,19 @@ public class level2Player : MonoBehaviour
 
 
     }
+
+    void OnCollisionEnter(Collision collision){
+        if(collision.gameObject.CompareTag("axe")){
+            axe = true;
+        }
+    }
    
+    private void inventory(){
+        if(axe){
+            axePic.SetActive(true);
+        }
+        else{
+            axePic.SetActive(false);
+        }
+    }
 }

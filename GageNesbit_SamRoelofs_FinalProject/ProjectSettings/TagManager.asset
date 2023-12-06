@@ -11,6 +11,7 @@ TagManager:
   - orangeKey
   - purpleKey
   - yellowKey
+  - axe
   layers:
   - Default
   - TransparentFX
