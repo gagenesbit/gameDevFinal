@@ -12,6 +12,8 @@ TagManager:
   - purpleKey
   - yellowKey
   - axe
+  - Axe
+  - tree
   layers:
   - Default
   - TransparentFX

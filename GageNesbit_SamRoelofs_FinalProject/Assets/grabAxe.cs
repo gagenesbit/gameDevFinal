@@ -6,7 +6,7 @@ using TMPro;
 public class grabAxe : MonoBehaviour
 {
     private bool hit=false;
-    public GameObject axe;
+    public GameObject swingingAxe, sittingAxe;
     private level2Player player;
     public GameObject playerObject;
 
@@ -23,7 +23,8 @@ public class grabAxe : MonoBehaviour
     void Update()
     {
         if(hit&&Input.GetKeyDown(KeyCode.E)){
-            axe.SetActive(false);
+            swingingAxe.SetActive(true);
+            sittingAxe.SetActive(false);
             interactionText.SetActive(false);
             player.hasAxe=true;
         }
