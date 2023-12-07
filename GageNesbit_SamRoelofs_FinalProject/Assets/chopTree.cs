@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class chopTree : MonoBehaviour
 {
+    public GameObject oar;
+    public Rigidbody rb;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = oar.GetComponent<Rigidbody>();
+        rb.useGravity = false;
     }
 
     // Update is called once per frame
@@ -17,8 +20,10 @@ public class chopTree : MonoBehaviour
         
     }
     void OnCollisionEnter(Collision collision){
-        if (collision.gameObject.CompareTag("tree")){
-            collision.gameObject.SetActive(false);
+        Debug.Log(collision.gameObject.tag);
+        if (collision.gameObject.CompareTag("Player")){
+            rb.useGravity = true;
+            gameObject.SetActive(false);
         }
     }
 }

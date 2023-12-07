@@ -20,7 +20,7 @@ public class level2Player : MonoBehaviour
     public bool hasWood=false;
     public bool hasSail=false;
     public bool hasOar=false;
-
+    public bool hasCoconut=false;
     //character quests
     public bool coconutPuzzle=false;
     public bool raftComplete=false;
