@@ -14,7 +14,12 @@ public class level2Player : MonoBehaviour
     //puzzle objects
     public bool hasAxe=false;
     public bool axe;
+
     public GameObject axePic;
+    public GameObject coconutPic;
+    public GameObject oarPic;
+    public GameObject woodPic;
+    public GameObject sailPic;
 
     //raft part objects
     public bool hasWood=false;
@@ -89,5 +94,35 @@ public class level2Player : MonoBehaviour
         else{
             axePic.SetActive(false);
         }
+
+        if(hasCoconut){
+            coconutPic.SetActive(true);
+        }
+        else{
+            coconutPic.SetActive(false);
+        }
+
+        if(hasOar){
+            oarPic.SetActive(true);
+        }
+        else{
+            oarPic.SetActive(false);
+        }
+
+        if(hasSail){
+            sailPic.SetActive(true);
+        }
+        else{
+            sailPic.SetActive(false);
+        }
+
+        if(hasWood){
+            woodPic.SetActive(true);
+        }
+        else{
+            woodPic.SetActive(false);
+        }
+        
+
     }
 }

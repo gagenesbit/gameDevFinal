@@ -30,7 +30,6 @@ public class grabOar : MonoBehaviour
             player.hasOar=true;
             swingingAxe.SetActive(false);
             sittingAxe.SetActive(false);
-            player.hasAxe=false;
         }
     }
 

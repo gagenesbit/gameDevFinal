@@ -49,6 +49,13 @@ public class talkbox : MonoBehaviour
             }
             interactionText.SetActive(false);
         }
+
+        if(oarGiven&&woodGiven&&sailGiven){
+            player.raftComplete=true;
+        }
+        if(coconutGiven){
+            coconuts.SetActive(true);
+        }
     }
 
     void OnCollisionEnter(Collision collision){
@@ -66,8 +73,6 @@ public class talkbox : MonoBehaviour
                 }
             }
             else{
-                coconuts.SetActive(true);
-
                 if(player.hasOar){
                     messageText.text="Press E to give Mouse the oar";
                     oarMessage=true;
@@ -82,9 +87,6 @@ public class talkbox : MonoBehaviour
                     messageText.text="Press E to give Mouse the wood";
                     woodMessage=true;
                     interactionText.SetActive(true);
-                }
-                else if(oarGiven&&woodGiven&&sailGiven){
-                    player.raftComplete=true;
                 }
                 else{
                     messageText.text="Bring me an oar, a sail, and some wood.";
