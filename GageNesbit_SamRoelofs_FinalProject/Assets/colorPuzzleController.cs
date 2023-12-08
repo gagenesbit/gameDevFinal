@@ -57,11 +57,11 @@ public class colorPuzzleController : MonoBehaviour
         }
         else{
             interactionText.SetActive(false);
-            if(move<1000){
+            if(move<2000){
                 falseWall.transform.Translate(Vector3.forward * -1f * Time.deltaTime);
                 move++;
             }
-            else if(move==1000){
+            else if(move==2000){
                 messageText.text="Press E to interact";
                 scriptComponent.enabled=false;
             }

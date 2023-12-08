@@ -20,6 +20,8 @@ public class cannon : MonoBehaviour
     private bool FIRED;
     private bool done;
 
+    public GameObject fuseObject;
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +32,11 @@ public class cannon : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   if(!launchTime){
+    {  
+        if(fusePlaced&&fuseObject.activeSelf==false){
+            fuseObject.SetActive(true);
+        }
+         if(!launchTime){
             if(Input.GetKeyDown(KeyCode.E)){
                 if(blackPowderMessage){
                     player.hasBlackPowder=false;

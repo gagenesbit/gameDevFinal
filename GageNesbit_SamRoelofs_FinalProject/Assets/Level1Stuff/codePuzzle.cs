@@ -10,7 +10,7 @@ public class codePuzzle : MonoBehaviour
     public GameObject keypad;
     private PlayerController player;
     public GameObject playerObject;
-    private string CODE="1234";
+    private string CODE="2023";
     private int completed=0;
     private int redo=0;
     private int rotation=0;
